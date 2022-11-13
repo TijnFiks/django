@@ -67,20 +67,33 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Department Name</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for department in departments %}
                     <tr>
-                        <th scope="row">{{department.id}}</employee></th>
+                        <th scope="row">{{department.id}}</th>
                         <td>{{department.department_name}}</td>
+                        <td>
+                            <form action="/main/department" method="GET">
+                                <button type="submit" name="id" value="{{department.id}}">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/main/delete_department/" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" name="id" value="{{department.id}}">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
 
             <h1>New Department</h1>
-            <form action="/main/department/" method="POST">
+            <form action="/main/new_department/" method="POST">
 
                 {% csrf_token %}
               <div class="row">
